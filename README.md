@@ -1,54 +1,31 @@
-# React + TypeScript + Vite
+# Vad du ska göra
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Grundläggande funktionalitet
 
-Currently, two official plugins are available:
+- [x]  Skapa ett inputfält där användaren kan skriva in nya todos
+- [x]  Lista alla todos som läggs till
+- [x]  Varje todo ska kunna markeras som färdig
+- [x]  Det ska gå att ta bort en todo från listan
+- [x]  Todos ska sparas i localStorage så att de finns kvar även när sidan laddas om
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Komponenter
 
-## Expanding the ESLint configuration
+- [ ]  Dela upp din applikation i minst följande komponenter:
+    - TodoList (huvudkomponent)
+    - TodoInput (för att lägga till nya todos)
+    - TodoItem (för varje enskild todo)
+- [x]  Använd props för att skicka data mellan komponenter
+- [x]  Använd state för att hantera todolistans data
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Styling
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- [ ]  Styla din applikation med CSS
+- [ ]  Todos som är färdiga ska visuellt markeras (till exempel genom genomstrykning)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Extrauppgifter (för den som vill):
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- [ ]  Möjlighet att kategorisera todos (t.ex. arbete, privat, studier)
+- [ ]  Filtrera todos baserat på kategori
+- [ ]  Möjlighet att sätta deadlines på todos
+- [x]  Sortera todos baserat på deadline eller status (färdig/ej färdig)
+- [ ]  Implementera drag-and-drop funktionalitet för att ändra ordning på todos
