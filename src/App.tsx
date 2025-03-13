@@ -4,9 +4,11 @@ import List from "./componets/List";
 import Filter from "./componets/Filter";
 import type { Filter as FilterType, Todo } from "./lib/types";
 import useLocalStorage from "./lib/useLocalStorage";
+import { useState } from "react";
 
 function App() {
     const [todos, setTodo] = useLocalStorage<Todo[]>("todos", []);
+    // const [todos, setTodo] = useState<Todo[]>([]);
 
     const addTodo = (title: string) => {
         const newTodo = {
@@ -36,27 +38,15 @@ function App() {
                 setTodo(todos.map((todo) => ({ ...todo, show: true })));
                 break;
             case "completed":
-                setTodo(
-                    todos.map((todo) =>
-                        todo.completed
-                            ? { ...todo, show: true }
-                            : { ...todo, show: false },
-                    ),
-                );
+                setTodo([
+                    ...todos.sort((todoA) => (!todoA.completed ? 1 : -1)),
+                ]);
                 break;
             case "active":
-                setTodo(
-                    todos.map((todo) =>
-                        !todo.completed
-                            ? { ...todo, show: true }
-                            : { ...todo, show: false },
-                    ),
-                );
-                break;
-            default:
-                setTodo(todos.map((todo) => ({ ...todo, show: true })));
+                setTodo([...todos.sort((todoA) => (todoA.completed ? 1 : -1))]);
                 break;
         }
+        console.table(todos);
     };
 
     return (
@@ -74,4 +64,3 @@ function App() {
 }
 
 export default App;
-

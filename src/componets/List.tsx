@@ -12,9 +12,6 @@ export default function List({
     return (
         <ul>
             {todos.map((todo) => {
-                if (!todo.show) {
-                    return null;
-                }
                 return (
                     <li key={todo.id}>
                         <input

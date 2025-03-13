@@ -11,11 +11,7 @@ export default function Input({
                     addTodo(title);
                 }
             }}>
-            <input
-                type="text"
-                name="title"
-                placeholder="Add a new todo"
-            />
+            <input type="text" name="title" placeholder="Add a new todo" />
             <button>Add</button>
         </form>
     );

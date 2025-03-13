@@ -5,7 +5,7 @@ export default function useLocalStorage<T>(
     initialValue: T,
 ): [T, (value: T) => void] {
     const items = localStorage.getItem(key);
-    
+
     const [value, setValue] = useState<T>(
         items ? JSON.parse(items) : initialValue,
     );
