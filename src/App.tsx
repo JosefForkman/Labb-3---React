@@ -4,11 +4,9 @@ import List from "./componets/List";
 import Filter from "./componets/Filter";
 import type { Filter as FilterType, Todo } from "./lib/types";
 import useLocalStorage from "./lib/useLocalStorage";
-import { useState } from "react";
 
 function App() {
     const [todos, setTodo] = useLocalStorage<Todo[]>("todos", []);
-    // const [todos, setTodo] = useState<Todo[]>([]);
 
     const addTodo = (title: string) => {
         const newTodo = {
