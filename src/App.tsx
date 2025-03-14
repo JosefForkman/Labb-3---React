@@ -1,7 +1,7 @@
 import "./App.css";
-import Input from "./componets/Input";
-import List from "./componets/List";
-import Filter from "./componets/Filter";
+import Input from "./components/Input";
+import List from "./components/List";
+import Filter from "./components/Filter";
 import type { Filter as FilterType, Todo } from "./lib/types";
 import useLocalStorage from "./lib/useLocalStorage";
 
