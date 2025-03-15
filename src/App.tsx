@@ -8,25 +8,30 @@ import useLocalStorage from "./lib/useLocalStorage";
 function App() {
     const [todos, setTodo] = useLocalStorage<TodoList[]>("todos", []);
 
-    const addTodo = (title: string) => {
-        let todoList = todos[0];
-
-        if (todoList === undefined) {
-            todoList = {
-                id: crypto.randomUUID(),
-                name: "Todos",
-                todos: [],
-            };
-        }
-
-        const newTodo = {
+    const addTodo = (title: string, category: string) => {
+        let todoList = todos.find((todo) => todo.name === category);
+        const todo = {
             id: crypto.randomUUID(),
             title,
             completed: false,
             show: true,
         };
-        todoList.todos.push(newTodo);
-        setTodo([todoList]);
+
+        // If the category does not exist, create a new category
+        if (!todoList) {
+            todoList = {
+                id: crypto.randomUUID(),
+                name: category,
+                todos: [todo],
+            };
+            setTodo([todoList, ...todos]);
+
+            return;
+        }
+
+        // Add the todo to the existing category
+        todoList.todos.push(todo);
+        setTodo([...todos]);
     };
 
     return (
