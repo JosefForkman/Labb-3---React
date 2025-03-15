@@ -7,6 +7,7 @@ import List from "./components/List";
 import ListItem from "./components/ListItem";
 import { Todo, TodoList } from "./lib/types";
 import useLocalStorage from "./lib/useLocalStorage";
+import useTodo from "./lib/useTodo";
 
 function App() {
     const [todos, setTodo] = useLocalStorage<TodoList[]>("todos", []);
@@ -38,12 +39,7 @@ function App() {
     };
 
     const updateTodo = (todo: Todo, todoListId: string) => {
-        const todoList = todos.find((todo) => todo.id === todoListId);
-        if (!todoList) {
-            return;
-        }
-
-        const todoItem = todoList.todos.find((item) => item.id === todo.id);
+        const todoItem = useTodo(todos, todoListId, todo.id);
         if (!todoItem) {
             return;
         }
@@ -52,12 +48,7 @@ function App() {
         setTodo([...todos]);
     };
     const toggleTodo = (todo: Todo, todoListId: string) => {
-        const todoList = todos.find((todo) => todo.id === todoListId);
-        if (!todoList) {
-            return;
-        }
-
-        const todoItem = todoList.todos.find((item) => item.id === todo.id);
+        const todoItem = useTodo(todos, todoListId, todo.id);
         if (!todoItem) {
             return;
         }

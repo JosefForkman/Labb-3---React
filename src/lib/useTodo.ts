@@ -1,26 +1,19 @@
 import type { TodoList } from "./types";
 
 export default function useTodo(
-    todos: TodoList[],
-    id: string,
+    Lists: TodoList[],
     todoListId: string,
+    todoId: string,
 ) {
-    const todoListIndex = todos.findIndex(
-        (todoList) => todoList.id === todoListId,
-    );
+    const todoList = Lists.find((list) => list.id === todoListId);
+    if (!todoList) {
+        return;
+    }
 
-    if (todoListIndex === -1) {
-        return null;
+    const todo = todoList.todos.find((todo) => todo.id === todoId);
+    if (!todo) {
+        return;
     }
-    
-    const todoIndex = todos[todoListIndex].todos.findIndex(
-        (todo) => todo.id === id,
-    );
-    if (todoIndex === -1) {
-        return null;
-    }
-    
-    const todo = todos[todoListIndex].todos[todoIndex];
-    
+
     return todo;
 }
