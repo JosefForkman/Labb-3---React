@@ -2,13 +2,16 @@ export type Todo = {
     id: string;
     title: string;
     completed: boolean;
-    show: boolean;
 };
 
 export type TodoList = {
     id: string;
     name: string;
     todos: Todo[];
+    show: boolean;
 };
 
-export type Filter = "all" | "completed" | "active";
+export type Filter = {
+    active: boolean;
+    name: string;
+};

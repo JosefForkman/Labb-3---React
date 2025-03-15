@@ -1,16 +1,16 @@
-// import "@fontsource/poppins";
-import { faEllipsis } from "@fortawesome/free-solid-svg-icons/faEllipsis";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import "./App.css";
 import Input from "./components/Input";
 import List from "./components/List";
-import ListItem from "./components/ListItem";
-import { Todo, TodoList } from "./lib/types";
+import { Filter, Todo, TodoList } from "./lib/types";
 import useLocalStorage from "./lib/useLocalStorage";
 import useTodo from "./lib/useTodo";
 
 function App() {
     const [todos, setTodo] = useLocalStorage<TodoList[]>("todos", []);
+    const [filter, setFilter] = useLocalStorage<Filter[]>("Filter", [
+        { active: true, name: "All" },
+    ]);
 
     const addTodo = (title: string, category: string) => {
         let todoList = todos.find((todo) => todo.name === category);
@@ -18,7 +18,6 @@ function App() {
             id: crypto.randomUUID(),
             title,
             completed: false,
-            show: true,
         };
 
         // If the category does not exist, create a new category
@@ -27,6 +26,7 @@ function App() {
                 id: crypto.randomUUID(),
                 name: category,
                 todos: [todo],
+                show: true,
             };
             setTodo([todoList, ...todos]);
 
@@ -72,12 +72,51 @@ function App() {
         setTodo([...todos]);
     };
 
+    const updateFilter = (filterName: string) => {
+        const newFilter = filter.map((filterItem) => {
+            if (filterItem.name === filterName) {
+                filterItem.active = true;
+            } else {
+                filterItem.active = false;
+            }
+
+            return filterItem;
+        });
+
+        const newTodo = todos.map((todo) => {
+            if (filterName === "All") {
+                todo.show = true;
+                return todo;
+            }
+
+            todo.show = todo.name === filterName;
+            return todo;
+        });
+        setTodo([...newTodo]);
+        setFilter(newFilter);
+    };
     return (
         <main>
             <h1>Todo List</h1>
-            <Input addTodo={addTodo} />
+            <Input addTodo={addTodo} Filters={filter} />
+            <ul className="filter">
+                {filter.map((filterItem, index) => {
+                    return (
+                        <li key={index}>
+                            <button
+                                className={filterItem.active ? "active" : ""}
+                                onClick={() => updateFilter(filterItem.name)}>
+                                {filterItem.name}
+                            </button>
+                        </li>
+                    );
+                })}
+            </ul>
             <ul className="todo-list">
                 {todos.map((todoList) => {
+                    if (!todoList.show) {
+                        return null;
+                    }
                     return (
                         <li key={todoList.id}>
                             <List
