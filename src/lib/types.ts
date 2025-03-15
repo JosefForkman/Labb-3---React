@@ -5,4 +5,10 @@ export type Todo = {
     show: boolean;
 };
 
+export type TodoList = {
+    id: string;
+    name: string;
+    todos: Todo[];
+};
+
 export type Filter = "all" | "completed" | "active";

@@ -1,0 +1,120 @@
+main {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.formAdd {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+
+    input {
+        color: var(--green-800);
+        font-family: "Poppins", sans-serif;
+        font-size: 1rem;
+        background-color: var(--green-200);
+        padding: 0.5rem 1rem;
+        border: 2px solid var(--green-400);
+        border-radius: 0.25em;
+    }
+    button {
+        color: var(--green-800);
+        background-color: var(--green-200);
+        padding: 0.25rem 1rem;
+        border: 2px solid var(--green-400);
+        border-radius: 0.25em;
+    }
+}
+
+.todo-list {
+    display: flex;
+    
+    
+    > li {
+        width: 100%;
+        padding: 1rem 1rem 1.5rem 1rem;
+        border: 3px solid var(--green-400);
+        border-radius: 0.5em;
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            color: var(--green-400);
+            
+            button {
+                font-size: 1.5rem;
+                color: var(--green-400);
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+            }
+        }
+        .sort {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            color: var(--green-400);
+
+            select {
+                color: var(--green-800);
+                font-family: "Poppins", sans-serif;
+                font-size: 1rem;
+                background-color: var(--green-200);
+                padding: 0.5rem 1rem;
+                border: 2px solid var(--green-400);
+                border-radius: 0.25em;
+            }
+        }
+        .todo {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            li {
+                display: flex;
+                justify-content: space-between;
+                
+                > div, label {
+                    display: flex;
+                    gap: 0.5rem;
+                }
+                label {
+                    color: var(--green-800);
+
+                    [type="checkbox"] {
+                        appearance: none;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        border: 2px solid var(--green-800);
+                        border-radius: 0.25em;
+                        cursor: pointer;
+                        transition: background-color 0.3s;
+
+                        &:checked {
+                            position: relative;
+                            background-color: var(--green-400);
+
+                            &::after {
+                                content: "✓";
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                color: var(--green-100);
+                                font-size: 1.4rem;
+                            }
+                        }
+                    }
+                }
+                button {
+                    font-size: 1.5rem;
+                    color: var(--green-400);
+                    background-color: transparent;
+                    border: none;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

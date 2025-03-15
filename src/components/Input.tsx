@@ -3,16 +3,17 @@ export default function Input({
 }: {
     addTodo: (title: string) => void;
 }) {
+    const handelSubmit = (event: FormData) => {
+        const title = event.get("title")?.toString();
+        if (title) {
+            addTodo(title);
+        }
+    };
+
     return (
-        <form
-            action={(event) => {
-                const title = event.get("title")?.toString();
-                if (title) {
-                    addTodo(title);
-                }
-            }}>
+        <form action={handelSubmit} className="formAdd">
             <input type="text" name="title" placeholder="Add a new todo" />
-            <button>Add</button>
+            <button>Lägg till</button>
         </form>
     );
 }
