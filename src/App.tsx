@@ -1,8 +1,11 @@
 // import "@fontsource/poppins";
+import { faEllipsis } from "@fortawesome/free-solid-svg-icons/faEllipsis";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./App.css";
 import Input from "./components/Input";
 import List from "./components/List";
-import { TodoList } from "./lib/types";
+import ListItem from "./components/ListItem";
+import { Todo, TodoList } from "./lib/types";
 import useLocalStorage from "./lib/useLocalStorage";
 
 function App() {
@@ -34,6 +37,50 @@ function App() {
         setTodo([...todos]);
     };
 
+    const updateTodo = (todo: Todo, todoListId: string) => {
+        const todoList = todos.find((todo) => todo.id === todoListId);
+        if (!todoList) {
+            return;
+        }
+
+        const todoItem = todoList.todos.find((item) => item.id === todo.id);
+        if (!todoItem) {
+            return;
+        }
+
+        todoItem.title = todo.title;
+        setTodo([...todos]);
+    };
+    const toggleTodo = (todo: Todo, todoListId: string) => {
+        const todoList = todos.find((todo) => todo.id === todoListId);
+        if (!todoList) {
+            return;
+        }
+
+        const todoItem = todoList.todos.find((item) => item.id === todo.id);
+        if (!todoItem) {
+            return;
+        }
+
+        todoItem.completed = !todoItem.completed;
+        setTodo([...todos]);
+    };
+
+    const deleteTodo = (todo: Todo, todoListId: string) => {
+        const todoList = todos.find((todo) => todo.id === todoListId);
+        if (!todoList) return;
+
+        const todoItemIndex = todoList.todos.findIndex(
+            (item) => item.id === todo.id,
+        );
+        if (todoItemIndex === -1) {
+            return;
+        }
+
+        todoList.todos.splice(todoItemIndex, 1);
+        setTodo([...todos]);
+    };
+
     return (
         <main>
             <h1>Todo List</h1>
@@ -44,7 +91,9 @@ function App() {
                         <li key={todoList.id}>
                             <List
                                 taskList={todoList}
-                                setTodo={setTodo}
+                                deleteTodo={deleteTodo}
+                                toggleTodo={toggleTodo}
+                                updateTodo={updateTodo}
                                 key={todoList.id}
                             />
                         </li>

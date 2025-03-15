@@ -5,14 +5,16 @@ import { useState } from "react";
 
 export default function ListItem({
     todo,
+    todoListId,
     updateTodo,
     toggleTodo,
     deleteTodo,
 }: {
     todo: Todo;
-    updateTodo: (id: string, title: string) => void;
-    toggleTodo: (id: string) => void;
-    deleteTodo: (id: string) => void;
+    todoListId: string;
+    updateTodo: (todo: Todo, todoListId: string) => void;
+    deleteTodo: (todo: Todo, todoListId: string) => void;
+    toggleTodo: (todo: Todo, todoListId: string) => void;
 }) {
     const [edit, setEdit] = useState(false);
     const [title, setTitle] = useState(todo.title);
@@ -27,12 +29,12 @@ export default function ListItem({
                 <input
                     type="checkbox"
                     defaultChecked={todo.completed}
-                    onChange={() => toggleTodo(todo.id)}
+                    onChange={() => toggleTodo(todo, todoListId)}
                 />
                 {edit ? (
                     <form
                         action={() => {
-                            updateTodo(todo.id, title);
+                            updateTodo({ ...todo, title }, todoListId);
                             setEdit(false);
                         }}>
                         <input
@@ -52,7 +54,7 @@ export default function ListItem({
                     <FontAwesomeIcon icon={faPenToSquare} />
                     <span className="sr-only">Edit todo name</span>
                 </button>
-                <button onClick={() => deleteTodo(todo.id)}>
+                <button onClick={() => deleteTodo(todo, todoListId)}>
                     <span className="sr-only">Remove todo</span>
                     <FontAwesomeIcon icon={faTrash} />
                 </button>

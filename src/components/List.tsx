@@ -1,49 +1,19 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { TodoList } from "../lib/types";
+import { Todo, TodoList } from "../lib/types";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons/faEllipsis";
 import ListItem from "./ListItem";
-import useTodo from "../lib/useTodo";
 
 export default function List({
     taskList,
-    setTodo,
+    updateTodo,
+    deleteTodo,
+    toggleTodo,
 }: {
     taskList: TodoList;
-    setTodo: (value: TodoList[]) => void;
+    updateTodo: (todo: Todo, todoListId: string) => void;
+    deleteTodo: (todo: Todo, todoListId: string) => void;
+    toggleTodo: (todo: Todo, todoListId: string) => void;
 }) {
-    const updateTodo = (id: string, title: string) => {
-        const todo = useTodo([taskList], id, taskList.id);
-        if (!todo) {
-            return;
-        }
-
-        todo.title = title;
-
-        setTodo([taskList]);
-    };
-    const toggleTodo = (id: string) => {
-        const todo = useTodo([taskList], id, taskList.id);
-        if (!todo) {
-            return;
-        }
-
-        todo.completed = !todo.completed;
-
-        setTodo([taskList]);
-    };
-
-    const deleteTodo = (id: string) => {
-        const todo = useTodo([taskList], id, taskList.id);
-        if (!todo) {
-            return;
-        }
-
-        const removeTodo = taskList.todos.filter((todo) => todo.id !== id);
-
-        taskList.todos = removeTodo;
-
-        setTodo([taskList]);
-    };
     return (
         <>
             <div className="header">
@@ -67,6 +37,7 @@ export default function List({
                         <li key={todo.id}>
                             <ListItem
                                 todo={todo}
+                                todoListId={taskList.id}
                                 updateTodo={updateTodo}
                                 deleteTodo={deleteTodo}
                                 toggleTodo={toggleTodo}
