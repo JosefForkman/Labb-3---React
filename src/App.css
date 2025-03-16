@@ -59,9 +59,24 @@ main {
         box-sizing: border-box;
 
         .header {
+            position: relative;
             display: flex;
             justify-content: space-between;
             color: var(--green-400);
+
+            input[type="text"] {
+                font-size: 1rem;
+                color: var(--green-800);
+                background-color: transparent;
+                width: 100%;
+                border: none;
+                border-bottom: 3px solid var(--green-400);
+                padding: 0.25em;
+
+                &:focus {
+                    outline: 2px solid var(--green-400);
+                }
+            }
 
             button {
                 font-size: 1.5rem;
@@ -69,6 +84,32 @@ main {
                 background-color: transparent;
                 border: none;
                 cursor: pointer;
+            }
+            .menu-list {
+                display: none;
+                position: absolute;
+                top: 2rem;
+                right: 0;
+                background-color: var(--green-200);
+
+                border-radius: 0.5em;
+                border: 3px solid var(--green-400);
+
+                button {
+                    display: block;
+                    font-size: 1rem;
+                    color: var(--green-100);
+                    background-color: transparent;
+                    border: none;
+                    padding: 0.5em 1em;
+                    cursor: pointer;
+                }
+
+                &.active {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
+                }
             }
         }
         .sort {

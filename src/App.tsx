@@ -108,6 +108,46 @@ function App() {
         setTodo([category, ...todos]);
     };
 
+    const updateListTitle = (title: string, todoListId: string) => {
+        const todoList = todos.find((todo) => todo.id === todoListId);
+
+        if (!todoList) {
+            return;
+        }
+
+        const filterItem = filter.find(
+            (filter) => filter.name === todoList.name,
+        );
+
+        if (!filterItem) {
+            return;
+        }
+
+        filterItem.name = title;
+        todoList.name = title;
+
+        setTodo([...todos]);
+        setFilter([...filter]);
+    };
+
+    const deleteList = (todoListId: string) => {
+        const todoList = todos.find((todo) => todo.id === todoListId);
+        const todoListIndex = todos.findIndex((todo) => todo.id === todoListId);
+        if (!todoList) {
+            return;
+        }
+        if (todoListIndex === -1) {
+            return;
+        }
+
+        const newFilter = filter.filter(
+            (filter) => filter.name !== todoList.name,
+        );
+        todos.splice(todoListIndex, 1);
+        setTodo([...todos]);
+        setFilter([...newFilter]);
+    };
+
     return (
         <main>
             <h1>Todo List</h1>
@@ -140,6 +180,8 @@ function App() {
                                 deleteTodo={deleteTodo}
                                 toggleTodo={toggleTodo}
                                 updateTodo={updateTodo}
+                                updateListTitle={updateListTitle}
+                                deleteList={deleteList}
                                 key={todoList.id}
                             />
                         </li>
