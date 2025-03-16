@@ -24,8 +24,8 @@
 
 ## Extrauppgifter (för den som vill):
 
-- [ ] Möjlighet att kategorisera todos (t.ex. arbete, privat, studier)
-- [ ] Filtrera todos baserat på kategori
+- [x] Möjlighet att kategorisera todos (t.ex. arbete, privat, studier)
+- [x] Filtrera todos baserat på kategori
 - [ ] Möjlighet att sätta deadlines på todos
-- [x] Sortera todos baserat på deadline eller status (färdig/ej färdig)
+- [ ] Sortera todos baserat på deadline eller status (färdig/ej färdig)
 - [ ] Implementera drag-and-drop funktionalitet för att ändra ordning på todos
