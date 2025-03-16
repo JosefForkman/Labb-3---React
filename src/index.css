@@ -31,3 +31,17 @@ select {
     border: 2px solid var(--green-400);
     border-radius: 0.25em;
 }
+
+.btn {
+    font-size: 1rem;
+    color: var(--green-800);
+    background-color: var(--green-200);
+    padding: 0.5em 1em;
+    border: 2px solid var(--green-400);
+    border-radius: 0.25em;
+    cursor: pointer;
+
+    &.w-100 {
+        width: 100%;
+    }
+}
