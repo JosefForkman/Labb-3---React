@@ -24,11 +24,16 @@ export default function Input({
             <label>
                 kategori:
                 <select name="category">
-                    {Filters.map((filter) => (
-                        <option key={filter.name} value={filter.name}>
-                            {filter.name}
-                        </option>
-                    ))}
+                    {Filters.map((filter) => {
+                        if (filter.name === "All") {
+                            return null;
+                        }
+                        return (
+                            <option key={filter.name} value={filter.name}>
+                                {filter.name}
+                            </option>
+                        );
+                    })}
                 </select>
             </label>
             <button className="btn">Lägg till</button>
