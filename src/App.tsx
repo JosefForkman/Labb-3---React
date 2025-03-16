@@ -95,6 +95,19 @@ function App() {
         setTodo([...newTodo]);
         setFilter(newFilter);
     };
+
+    const addCategory = () => {
+        const category: TodoList = {
+            id: crypto.randomUUID(),
+            name: `category ${todos.length + 1}`,
+            todos: [],
+            show: true,
+        };
+        const newFilter: Filter = { active: false, name: category.name };
+        setFilter([...filter, newFilter]);
+        setTodo([category, ...todos]);
+    };
+
     return (
         <main>
             <h1>Todo List</h1>
@@ -112,6 +125,9 @@ function App() {
                     );
                 })}
             </ul>
+            <button className="btn w-100" onClick={addCategory}>
+                Add task category
+            </button>
             <ul className="todo-list">
                 {todos.map((todoList) => {
                     if (!todoList.show) {

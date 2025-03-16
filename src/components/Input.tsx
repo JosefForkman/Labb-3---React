@@ -31,7 +31,7 @@ export default function Input({
                     ))}
                 </select>
             </label>
-            <button>Lägg till</button>
+            <button className="btn">Lägg till</button>
         </form>
     );
 }
