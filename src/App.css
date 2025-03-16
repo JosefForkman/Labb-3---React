@@ -29,8 +29,10 @@ main {
 .filter {
     display: flex;
     gap: 0.5rem;
+    overflow-x: auto;
 
     button {
+        display: block;
         font-size: 1rem;
         color: var(--green-400);
         background-color: transparent;
