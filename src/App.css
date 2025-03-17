@@ -14,6 +14,7 @@ main {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+        color: var(--green-400);
     }
     input {
         color: var(--green-800);
@@ -30,6 +31,7 @@ main {
     display: flex;
     gap: 0.5rem;
     overflow-x: auto;
+    margin-block: 1.5rem 3rem;
 
     button {
         display: block;
@@ -45,6 +47,10 @@ main {
             color: var(--green-100);
         }
     }
+}
+
+.addTask {
+    margin-bottom: 1.5rem;
 }
 
 .todo-list {

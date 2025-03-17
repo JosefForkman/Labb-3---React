@@ -150,7 +150,6 @@ function App() {
 
     return (
         <main>
-            <h1>Todo List</h1>
             <Input addTodo={addTodo} Filters={filter} />
             <ul className="filter">
                 {filter.map((filterItem, index) => {
@@ -165,7 +164,7 @@ function App() {
                     );
                 })}
             </ul>
-            <button className="btn w-100" onClick={addCategory}>
+            <button className="btn w-100 addTask" onClick={addCategory}>
                 Add task category
             </button>
             <ul className="todo-list">
