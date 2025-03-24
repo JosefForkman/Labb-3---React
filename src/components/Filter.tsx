@@ -5,8 +5,15 @@ export default function Filter({
 }: {
     filterAt: (filter: Filter) => void;
 }) {
+    const formAction = (event: FormData) => {
+        const filter = event.get("filter")?.toString();
+        if (filter) {
+            filterAt({ active: true, name: filter });
+        }
+    };
+
     return (
-        <form action={(event) => filterAt(event.get("filter") as Filter)}>
+        <form action={formAction}>
             <select name="filter">
                 <option value="all">All</option>
                 <option value="completed">Completed</option>

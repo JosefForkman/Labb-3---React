@@ -13,6 +13,7 @@ export default function List({
     updateTodo,
     deleteTodo,
     toggleTodo,
+    sortTodo,
     updateListTitle,
     deleteList,
 }: {
@@ -20,6 +21,7 @@ export default function List({
     updateTodo: (todo: Todo, todoListId: string) => void;
     deleteTodo: (todo: Todo, todoListId: string) => void;
     toggleTodo: (todo: Todo, todoListId: string) => void;
+    sortTodo: (todoListId: string, sort: "asc" | "desc") => void;
     updateListTitle: (title: string, todoListId: string) => void;
     deleteList: (todoListId: string) => void;
 }) {
@@ -79,7 +81,10 @@ export default function List({
 
             <label className="sort">
                 Sort by:
-                <select>
+                <select
+                    onChange={(event) =>
+                        sortTodo(taskList.id, event.target.value as "asc" | "desc")
+                    }>
                     <option value="asc">Ascending</option>
                     <option value="desc">Descending</option>
                 </select>

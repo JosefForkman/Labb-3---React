@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./App.css";
 import Input from "./components/Input";
 import List from "./components/List";
@@ -108,6 +107,36 @@ function App() {
         setTodo([category, ...todos]);
     };
 
+    const sortTodo = (todoListId: string, sort: "asc" | "desc") => {
+        const list = todos.find((list) => list.id === todoListId);
+
+        if (!list) {
+            return;
+        }
+
+        if (sort === "asc") {
+            list.todos = list.todos.sort((todoA) => {
+                if (!todoA.completed) {
+                    return -1;
+                }
+                return 1;
+            });
+        }
+
+        if (sort === "desc") {
+            list.todos = list.todos.sort((todoA) => {
+                if (todoA.completed) {
+                    return -1;
+                }
+                return 1;
+            });
+        }
+
+        console.table(list.todos);
+
+        setTodo([...todos]);
+    };
+
     const updateListTitle = (title: string, todoListId: string) => {
         const todoList = todos.find((todo) => todo.id === todoListId);
 
@@ -179,6 +208,7 @@ function App() {
                                 deleteTodo={deleteTodo}
                                 toggleTodo={toggleTodo}
                                 updateTodo={updateTodo}
+                                sortTodo={sortTodo}
                                 updateListTitle={updateListTitle}
                                 deleteList={deleteList}
                                 key={todoList.id}
